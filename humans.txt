@@ -1,0 +1,18 @@
+/* TEAM */
+	Front-end dev: Asier Musategi
+	Twitter: @asiermusa
+
+
+	Front-end designer: Naiara Abaroa
+	Twitter: @nabaroa
+
+
+	From: Gernika & Lekeitio, Basque Country
+
+
+
+
+/* SITE */
+
+	Language: Euskera
+	Tools: Atom, iTerm, Gulp, PostCSS
