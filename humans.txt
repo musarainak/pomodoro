@@ -1,18 +1,10 @@
-/* TEAM */
-	Front-end dev: Asier Musatadi
-	Twitter: @asiermusa
+/* LANTALDEA */
+	Front-end garatzailea: Asier Musatadi
+	Twittera: @asiermusa
 
 
-	Front-end designer: Naiara Abaroa
-	Twitter: @nabaroa
+	Front-end diseinatzailea: Naiara Abaroa
+	Twittera: @nabaroa
 
 
-	From: Gernika & Lekeitio, Basque Country
-
-
-
-
-/* SITE */
-
-	Language: Euskera
-	Tools: Atom, iTerm, Gulp, PostCSS
+	Kokapena: Gernika & Lekeitio, Euskal Herria
