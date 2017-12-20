@@ -1,5 +1,5 @@
 /* TEAM */
-	Front-end dev: Asier Musategi
+	Front-end dev: Asier Musatadi
 	Twitter: @asiermusa
 
 
