@@ -75,7 +75,9 @@ function countTimers(minutes, sound) {
 
   function timer() {
 
-    elReset.disabled = false;
+    setTimeout(function () {
+      elReset.disabled = false;
+    }, 1000);
 
     if (reset) {
       pause = true;
@@ -86,7 +88,7 @@ function countTimers(minutes, sound) {
       }
       setTimeout(function () {
         el.disabled = false;
-      }, 100);
+      }, 1000);
     }
 
     if (!pause) {
