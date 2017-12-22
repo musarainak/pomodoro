@@ -5,6 +5,7 @@ var elSettings = document.getElementById('settings');
 var elReset = document.getElementById('reset');
 var pause = true;
 var reset = false;
+var finish = false;
 var selectedSound = document.querySelector('.alarm__item.selected');
 var setMinutes = document.getElementById("minutes");
 var trySound = new Audio();
@@ -26,12 +27,16 @@ document.addEventListener('click', function (event) {
 }, false);
 
 function checkSettingInput() {
+
+  reset = false;
+  pause = true;
   var x = document.getElementById("customMinutes").value;
 
   selectedSound = document.querySelector('.alarm__item.selected');
 
   var snd = new Audio("dist/sounds/" + selectedSound.getAttribute('data-alarm') + ".mp3");
-  console.log(selectedSound.getAttribute('data-alarm'));
+
+  document.getElementById("timer").innerHTML = x + ":00";
 
   if (isNaN(x) || x == "") {
     alert('Erabili zenbakiak mesedez');
@@ -47,14 +52,16 @@ function resetAll() {
 
   reset = true;
   pause = true;
+  el.disabled = true;
   var x = document.getElementById("customMinutes").value;
 
   selectedSound = document.querySelector('.alarm__item.selected');
 
   var snd = new Audio("dist/sounds/" + selectedSound.getAttribute('data-alarm') + ".mp3");
 
-  document.getElementById("timer").innerHTML = document.getElementById("customMinutes").value + ":00";
-  countTimers(document.getElementById("customMinutes").value, snd);
+  document.getElementById("timer").innerHTML = x + ":00";
+  countTimers(x, snd);
+
   el.innerHTML = "Hasi!";
 }
 
@@ -68,29 +75,46 @@ function countTimers(minutes, sound) {
 
   function timer() {
 
+    elReset.disabled = false;
+
     if (reset) {
-      clearInterval(counter);
-      reset = false;
       pause = true;
+      reset = false;
+
+      if (!finish) {
+        clearInterval(counter);
+      }
+      setTimeout(function () {
+        el.disabled = false;
+      }, 100);
     }
+
     if (!pause) {
       //jarraitu pausarik ez bada
+
+
       seconds--;
+
       if (seconds < 0) {
-        seconds = mainSeconds;
-        if (mins > 0 && !reset) {
+
+        seconds = mainSeconds - 1;
+        if (mins > 0) {
           mins--;
         } else {
           clearInterval(counter);
+          finish = true;
+          seconds = 0;
           snd.play();
           el.innerHTML = "Hasi!";
           notifyMe();
         }
-      } else {
-        document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
       }
+
+      document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
     }
   }
+
+  return;
 }
 
 elSettings.addEventListener('click', function () {
@@ -105,15 +129,13 @@ el.addEventListener('click', function () {
 
   if (pause == false) {
     pause = true;
-    reset = false;
     el.innerHTML = "Segi!";
   } else {
     pause = false;
-    reset = false;
     el.innerHTML = "Gelditu!";
-    elReset.disabled = false;
   }
-
+  reset = false;
+  elReset.disabled = true;
   el.classList.toggle("is-play");
 });
 
@@ -136,7 +158,7 @@ function notifyMe() {
     timeout: 8000, // Timeout before notification closes automatically.
     vibrate: [100, 100, 100], // An array of vibration pulses for mobile devices.
     onClick: function onClick() {
-      // Callback for when the notification is clicked. 
+      // Callback for when the notification is clicked.
       console.log(this);
     }
   });

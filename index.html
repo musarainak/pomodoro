@@ -10,43 +10,43 @@
 </head>
 
 <body>
-	
-	<h2>Pomodoro</h2>
-		
-	<div id="timer"></div>
-	
+
+	<h1>Pomodoro</h1>
+
+	<h2 id="timer"></h2>
+
 	<div class="reset" style="display: none">
-		
+
 		<button id="pause" class="is-pause">Hasi!</button>
 		<button id="reset" disabled="disabled">Reset</button>
-		
+
 		<button id="sound" style="display: none">Soinua gelditu!</button>
-		
+
 	</div>
-	
+
 	<hr>
-	
+
 	<h3>Iraupena</h3>
 	<input type="number" id="customMinutes" min="1" max="60">
-	
+
 	<hr>
 	<div id="alarms" class="alarm">
-		
+
 		<h3>Soinua</h3>
-		
+
 		<div class="alarm__item selected" data-alarm="alarm-analog">Alarm Analog <button class="alarm__check" data-alarm="alarm-analog">Probatu</button></div>
 		<div class="alarm__item" data-alarm="alarm-bells">Alarm Bells <button class="alarm__check" data-alarm="alarm-bells">Probatu</button></div>
 		<div class="alarm__item" data-alarm="alarm-foghorn">Alarm Foghorn <button class="alarm__check" data-alarm="alarm-foghorn">Probatu</button></div>
 		<div class="alarm__item" data-alarm="alarm-submarine">Alarm Submarine <button class="alarm__check" data-alarm="alarm-submarine">Probatu</button></div>
-		
+
 	</div>
-	
-	
+
+
 	<button id="settings">Aldaketak gorde!</button>
-	
+
 	<script src="dist/js/scripts.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
-	
+
 </body>
 
 </html>
