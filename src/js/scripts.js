@@ -62,7 +62,7 @@ function resetAll(){
 function countTimers(minutes, sound) {
 
   var snd = sound;
-  var mainSeconds = 3;
+  var mainSeconds = 60;
   var mins = minutes-1;
   var seconds = mainSeconds;
   var counter = setInterval(timer, 1000);
