@@ -6,6 +6,10 @@ header,footer,main,aside{
   align-items: center;
   justify-content: space-between;
   height: 100vh;
+  @media all and (max-width: 800px){
+    flex-direction: column;
+    height: inherit;
+  }
 }
 .panel{
   border-left:1px solid var(--bare);
