@@ -2,6 +2,7 @@
   --base-font: lato ;
   --base-font-strong: lato-bold ;
   --base-font-size:18px;
+  --base-font-color:var(--barer);
 }
 
 @font-face {
@@ -22,4 +23,5 @@
 body{
   font-family: var(--base-font);
   font-size: var(--base-font-size);
+  color: var(--base-font-color);
 }

@@ -7,7 +7,9 @@
 @import "elements/links.css";
 @import "elements/headings.css";
 @import "components/alarms.css";
+@import "components/animations.css";
 @import "components/buttons.css";
+@import "components/header.css";
 @import "components/icons.css";
 @import "components/timer.css";
 @import "components/tools.css";
