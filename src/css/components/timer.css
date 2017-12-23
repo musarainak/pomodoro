@@ -1,0 +1,10 @@
+.timer{
+  display: flex;
+  flex-direction: column;
+
+
+}
+body{
+  background: url('../../assets/erlojua.svg') center no-repeat;
+  background-size: contain;
+}

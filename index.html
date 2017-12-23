@@ -3,50 +3,46 @@
 
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pomodoro</title>
-    <link rel="stylesheet" href="dist/css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>tik-tak.</title>
+	<link rel="stylesheet" href="dist/css/style.css">
 </head>
 
 <body>
+<div class="container">
+	<header>
+		<h1>tik-tak.</h1>
+	</header>
+	<main class="timer">
+		<h2 id="timer">25:00</h2>
+		<div class="tools reset">
+			<button id="pause" class="button is-pause"><span class="icon-play"></span>Hasi!</button>
+			<button id="reset" class="button" disabled="disabled">Reset</button>
+			<button id="sound" style="display: none">Soinua gelditu!</button>
+		</div>
+	</main>
+	<aside class="panel">
+		<h3 class="panel__title">Ezarpenak</h3>
+		<h4>Iraupena</h4>
+		<label for="customMinutes">Lana</label>
+		<input type="number" id="customMinutes" min="1" max="60">
+		<label for="break">Deskantzua</label>
+		<input id="break" type="number" id="" min="1" max="60">
+		<div id="alarms" class="alarm">
+			<h4>Soinua</h4>
+			<div class="alarm__item selected" data-alarm="alarm-analog">Alarm Analog <button class="button alarm__check" data-alarm="alarm-analog">Probatu</button></div>
+			<div class="alarm__item" data-alarm="alarm-bells">Alarm Bells <button class="button alarm__check" data-alarm="alarm-bells">Probatu</button></div>
+			<div class="alarm__item" data-alarm="alarm-foghorn">Alarm Foghorn <button class="button alarm__check" data-alarm="alarm-foghorn">Probatu</button></div>
+			<div class="alarm__item" data-alarm="alarm-submarine">Alarm Submarine <button class="button alarm__check" data-alarm="alarm-submarine">Probatu</button></div>
+		</div>
+		<button class="button" id="settings">Aldaketak gorde!</button>
+		</div>
+	</aside>
 
-	<h1>Pomodoro</h1>
-
-	<h2 id="timer"></h2>
-
-	<div class="reset" style="display: none">
-
-		<button id="pause" class="is-pause">Hasi!</button>
-		<button id="reset" disabled="disabled">Reset</button>
-
-		<button id="sound" style="display: none">Soinua gelditu!</button>
-
-	</div>
-
-	<hr>
-
-	<h3>Iraupena</h3>
-	<input type="number" id="customMinutes" min="1" max="60">
-
-	<hr>
-	<div id="alarms" class="alarm">
-
-		<h3>Soinua</h3>
-
-		<div class="alarm__item selected" data-alarm="alarm-analog">Alarm Analog <button class="alarm__check" data-alarm="alarm-analog">Probatu</button></div>
-		<div class="alarm__item" data-alarm="alarm-bells">Alarm Bells <button class="alarm__check" data-alarm="alarm-bells">Probatu</button></div>
-		<div class="alarm__item" data-alarm="alarm-foghorn">Alarm Foghorn <button class="alarm__check" data-alarm="alarm-foghorn">Probatu</button></div>
-		<div class="alarm__item" data-alarm="alarm-submarine">Alarm Submarine <button class="alarm__check" data-alarm="alarm-submarine">Probatu</button></div>
-
-	</div>
-
-
-	<button id="settings">Aldaketak gorde!</button>
 
 	<script src="dist/js/scripts.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
-
 </body>
 
 </html>
