@@ -1,3 +1,7 @@
-.header__title{
+.logo{
   color: var(--base-font-color);
+}
+.logo__dot{
+  animation: animate-blink 1s linear infinite alternate;
+  color:var(--color);
 }
