@@ -1,0 +1,4 @@
+.alarm__toolbox{
+  display: flex;
+  justify-content: space-around;
+}

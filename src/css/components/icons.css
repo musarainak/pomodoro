@@ -14,6 +14,7 @@
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
+  display: block;
   line-height: 1;
   /* custom */
   font-size: 2em;

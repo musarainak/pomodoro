@@ -6,6 +6,7 @@
 @import "objects/layout.css";
 @import "elements/links.css";
 @import "elements/headings.css";
+@import "components/alarms.css";
 @import "components/buttons.css";
 @import "components/icons.css";
 @import "components/timer.css";
