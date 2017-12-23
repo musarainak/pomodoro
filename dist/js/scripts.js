@@ -7,8 +7,26 @@ var pause = true;
 var reset = false;
 var finish = false;
 var selectedSound = document.querySelector('.alarm__item.selected');
-var setMinutes = document.getElementById("minutes");
+var setMinutes = document.getElementById("customMinutes");
 var trySound = new Audio();
+
+// store
+setMinutes.value = localStorage.storeMinutes;
+
+window.onload = function () {
+
+  var elements = document.querySelectorAll('.alarm__item');
+  // remove class to all chosen elements
+  for (var i = 0; i < elements.length; i++) {
+
+    if (elements[i].getAttribute('data-alarm') == localStorage.storeAlarm) {
+      elements[i].classList.add('selected');
+    }
+  }
+};
+
+//console.log(document.querySelector( 'alarm__item' ).getAttribute('data-alarm') ));
+
 
 document.addEventListener('click', function (event) {
   if (event.target.classList.contains('alarm__item')) {
@@ -44,6 +62,11 @@ function checkSettingInput() {
   } else {
     document.querySelector('.reset').style.display = "block";
     elSettings.disabled = true;
+
+    //store
+    localStorage.storeMinutes = x;
+    localStorage.storeAlarm = selectedSound.getAttribute('data-alarm');
+
     countTimers(x, snd);
   }
 }

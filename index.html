@@ -7,7 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pomodoro</title>
     <link rel="stylesheet" href="dist/css/style.css">
+
+		<style>
+		.alarm__item.selected{
+			color: red;
+		}
+		</style>
 </head>
+
 
 <body>
 
@@ -34,7 +41,7 @@
 
 		<h3>Soinua</h3>
 
-		<div class="alarm__item selected" data-alarm="alarm-analog">Alarm Analog <button class="alarm__check" data-alarm="alarm-analog">Probatu</button></div>
+		<div class="alarm__item" data-alarm="alarm-analog">Alarm Analog <button class="alarm__check" data-alarm="alarm-analog">Probatu</button></div>
 		<div class="alarm__item" data-alarm="alarm-bells">Alarm Bells <button class="alarm__check" data-alarm="alarm-bells">Probatu</button></div>
 		<div class="alarm__item" data-alarm="alarm-foghorn">Alarm Foghorn <button class="alarm__check" data-alarm="alarm-foghorn">Probatu</button></div>
 		<div class="alarm__item" data-alarm="alarm-submarine">Alarm Submarine <button class="alarm__check" data-alarm="alarm-submarine">Probatu</button></div>
