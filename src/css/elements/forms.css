@@ -1,5 +1,5 @@
 input{
   padding: calc(2 * var(--spacer));
-  width: 80%;
   font-size: 1em;
+  border:1px solid var(--bare);
 }

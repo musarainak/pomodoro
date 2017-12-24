@@ -6,14 +6,27 @@
   justify-content: space-around;
   background: var(--white);
 }
-.panel__title{
-  line-height: 2em;
+.panel__header{
+  padding: 0;
 }
-.panel__form{
+.panel__title{
+  line-height: 1.5em;
+  margin-bottom: calc(2 * var(--spacer));
+  border-bottom:1px solid var(--bare);
+}
+.panel__item-group{
   display: flex;
   justify-content: space-between;
 }
-
+.panel__label{
+  font-size: .8em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  &:first-child{
+    margin-right: var(--spacer);
+  }
+}
 .panel__input{
 
 }

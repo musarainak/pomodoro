@@ -1,8 +1,10 @@
 .alarm__toolbox {
+  padding:calc(2 * var(--spacer)) 0;
   display: flex;
   justify-content: space-around;
   [class^="icon-"], [class*=" icon-"] {
-    font-size: 6em;
+    font-size: 4em;
+    color:var(--barer);
   }
 }
 .alarm__check{
@@ -10,6 +12,9 @@
   flex-direction: column;
 }
 .selected {
+  [class^="icon-"], [class*=" icon-"] {
+    color:var(--opaque);
+  }
   position: relative;
   &:before {
     position: absolute;
