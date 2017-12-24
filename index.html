@@ -10,36 +10,40 @@
 </head>
 
 <body>
-<div class="container">
-	<header>
-		<h1 class="logo">tik-tak<span class="logo__dot">.</span></h1>
-	</header>
-	<main class="timer">
-		<h2 id="timer">25:00</h2>
-		<div class="tools reset">
-			<button id="pause" class="is-pause"><span class="icon-play"></span></button>
-			<button id="reset" class="" disabled="disabled"><span class="icon-update"></span></button>
-			<button id="sound"><span class="icon-volume-none"></span></button>
-		</div>
-	</main>
-	<aside class="panel">
-		<h3 class="panel__title">Ezarpenak</h3>
-		<h4 class="panel__title">Iraupena</h4>
-		<div class="panel__form">
-			<label for="customMinutes">Lana<input class="panel__input" type="number" id="customMinutes" min="1" max="60"></label>
-			<label for="break">Deskantzua<input class="panel__input" id="break" type="number" id="" min="1" max="60"></label>
-		</div>
-		<div id="alarms" class="alarm">
-			<h4 class="panel__title">Soinua</h4>
-		<div class="alarm__toolbox">
-				<div class="alarm__item selected" data-alarm="alarm-analog"> <button class="alarm__check" data-alarm="alarm-analog"><span class="icon-watch"></span>Probatu</button></div>
-			<div class="alarm__item" data-alarm="alarm-bells"></span> <button class="alarm__check" data-alarm="alarm-bells"><span class="icon-bell"></span>Probatu</button></div>
-			<div class="alarm__item" data-alarm="alarm-foghorn"></span><button class="alarm__check" data-alarm="alarm-foghorn"><span class="icon-ship"></span>Probatu</button></div>
-			<div class="alarm__item" data-alarm="alarm-submarine"></span><button class="alarm__check" data-alarm="alarm-submarine"><span class="icon-submarine"></span>Probatu</button></div>
-		</div>
-		</div>
-		<button class="button is-positive" id="settings">Aldaketak gorde!</button>
-		</div>
+	<div class="container">
+		<header>
+			<h1 class="logo">tik-tak<span class="logo__dot">.</span></h1>
+		</header>
+		<main class="timer">
+			<h2 id="timer">25:00</h2>
+			<div class="tools reset">
+				<button id="pause" class="is-pause"><span class="icon-play"></span></button>
+				<button id="reset" class="" disabled="disabled"><span class="icon-update"></span></button>
+				<button id="sound"><span class="icon-volume-none"></span></button>
+			</div>
+		</main>
+		<aside class="panel">
+			<h3 class="panel__title">Ezarpenak</h3>
+			<h4 class="panel__title">Iraupena</h4>
+			<div class="panel__form">
+				<label for="customMinutes">Lana<input class="panel__input" type="number" id="customMinutes" min="1" max="60"></label>
+				<label for="break">Deskantzua<input class="panel__input" id="break" type="number" id="" min="1" max="60"></label>
+			</div>
+			<div id="alarms" class="alarm">
+				<h4 class="panel__title">Soinua</h4>
+				<div class="alarm__toolbox">
+					<div class="alarm__item selected" data-alarm="alarm-analog"> <button class="alarm__check" data-alarm="alarm-analog"><span class="icon-watch"></span>Probatu</button></div>
+					<div class="alarm__item" data-alarm="alarm-bells">
+						</span> <button class="alarm__check" data-alarm="alarm-bells"><span class="icon-bell"></span>Probatu</button></div>
+					<div class="alarm__item" data-alarm="alarm-foghorn">
+						</span><button class="alarm__check" data-alarm="alarm-foghorn"><span class="icon-ship"></span>Probatu</button></div>
+					<div class="alarm__item" data-alarm="alarm-submarine">
+						</span><button class="alarm__check" data-alarm="alarm-submarine"><span class="icon-submarine"></span>Probatu</button></div>
+				</div>
+			</div>
+			<button class="button is-positive" id="settings">Aldaketak gorde!</button>
+			<p class="is-small">by <a href="https://github.com/musarainak" target="_blank">Musarañak</a></p>
+	</div>
 	</aside>
 
 
