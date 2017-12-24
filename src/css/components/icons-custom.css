@@ -1,11 +1,18 @@
 [class^="icon-"], [class*=" icon-"] {
-
   /* font-size: 6em; */
+}
 
+.icon-play {
+  color: var(--color);
 }
-.icon-play{
-  color:var(--color);
+
+.icon-close {
+  text-decoration: none;
 }
-.icon-close{
+
+.icon-settings {
+  position: absolute;
+  top: calc(3 * var(--spacer));
+  right: calc(3 * var(--spacer));
   text-decoration: none;
 }
