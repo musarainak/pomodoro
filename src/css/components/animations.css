@@ -1,0 +1,11 @@
+.has-animation--blink {
+  animation: animate-blink 1s linear infinite alternate;
+}
+@keyframes animate-blink {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,18 @@
+:root{
+button-border-radius: var(--border-radius);
+
+}
+
+.button{
+  padding:  calc(2* var(--spacer));
+  background: var(--bare);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+
+}
+.is-positive{
+  background: var(--color);
+  color:var(--white);
+}

@@ -1,10 +1,10 @@
 :root {
   --spacer: 8px;
 
-  --color: #01A9DB;
+  --color: #00A19A;
   --color-dark: #0489B1;
 
-  /*// Greyscale*/
+  /* Greyscale*/
   --black: black;
   --opaque: #111111;
   --darker: #222222;
@@ -14,8 +14,8 @@
   --neutral: #666666;
   --paler: #777777;
   --pale: #999999;
-  --barer: #b9b8b8;
-  --bare: #cccccc;
+  --barer: #CCCCCC;
+  --bare: #ebebeb;
   --white: white;
 
   --border-radius:4px;

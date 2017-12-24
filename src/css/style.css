@@ -1,10 +1,21 @@
-/*PostCSS based CSS*/
-@import "settings/variables.css";
+ /*PostCSS based CSS*/
+@import "settings/tokens.css";
 @import "tools/mixins.css";
 @import "generic/reset.css";
 @import "elements/typography.css";
-@import "elements/layout.css";
+@import "objects/layout.css";
+@import "elements/buttons.css";
+@import "elements/forms.css";
 @import "elements/links.css";
 @import "elements/headings.css";
+@import "components/alarms.css";
+@import "components/animations.css";
+@import "components/buttons.css";
+@import "components/header.css";
+@import "components/icons.css";
+@import "components/icons-custom.css";
+@import "components/panel.css";
+@import "components/timer.css";
+@import "components/tools.css";
 @import "trumps/type.css";
 @import "trumps/alignment.css";

@@ -1,0 +1,8 @@
+[class^="icon-"], [class*=" icon-"] {
+
+  font-size: 6em;
+
+}
+.icon-play{
+  color:var(--color);
+}

@@ -4,7 +4,7 @@ var elReset = document.getElementById('reset');
 var pause = true;
 var reset = false;
 var finish = false;
-var selectedSound = document.querySelector('.alarm__item.selected');
+var selectedSound = document.querySelector('.alarm__check.selected');
 var setMinutes = document.getElementById("customMinutes");
 var trySound = new Audio();
 
@@ -13,7 +13,7 @@ setMinutes.value = localStorage.storeMinutes;
 
 window.onload = () => {
 
-  var elements = document.querySelectorAll('.alarm__item');
+  var elements = document.querySelectorAll('.alarm__check');
   // remove class to all chosen elements
   for (var i=0; i<elements.length; i++) {
 
@@ -29,22 +29,7 @@ window.onload = () => {
 
 
 
-document.addEventListener('click', (event) => {
-    if ( event.target.classList.contains( 'alarm__item' ) ) {
 
-       //console.dir(event.target);
-
-		var elements = document.querySelectorAll('.selected');
-		// remove class to all chosen elements
-		for (var i=0; i<elements.length; i++) {
-
-	      elements[i].classList.remove('selected');
-	    }
-
-  		event.target.classList.add('selected');
-
-    }
-}, false);
 
 function checkSettingInput(){
 
@@ -52,7 +37,7 @@ function checkSettingInput(){
   pause = true;
   let x=document.getElementById("customMinutes").value;
 
-  selectedSound = document.querySelector('.alarm__item.selected');
+  selectedSound = document.querySelector('.alarm__check.selected');
 
   var snd = new Audio("dist/sounds/"+ selectedSound.getAttribute('data-alarm') +".mp3");
 
@@ -82,14 +67,14 @@ function resetAll(){
   el.disabled=true;
   let x=document.getElementById("customMinutes").value;
 
-  selectedSound = document.querySelector('.alarm__item.selected');
+  selectedSound = document.querySelector('.alarm__check.selected');
 
   var snd = new Audio("dist/sounds/"+ selectedSound.getAttribute('data-alarm') +".mp3");
 
   document.getElementById("timer").innerHTML = x+":00";
   countTimers(x, snd);
 
-  el.innerHTML ="Hasi!";
+  el.innerHTML ="<span class='icon-play'></span>";
 
 }
 
@@ -100,6 +85,15 @@ function countTimers(minutes, sound) {
   var mins = minutes-1;
   var seconds = mainSeconds;
   var counter = setInterval(timer, 1000);
+
+  var time = (mainSeconds*minutes)+2;
+  var initialOffset = '440';
+  var i = 1;
+
+/* Need initial run as interval hasn't yet occured... */
+
+  //document.querySelector('.circle_animation').style.strokeDashoffset = initialOffset-(1*(initialOffset/time));
+
 
   function timer() {
 
@@ -116,8 +110,6 @@ function countTimers(minutes, sound) {
     }
 
     if (!pause) { //jarraitu pausarik ez bada
-
-
         seconds--;
 
         if (seconds < 0) {
@@ -139,6 +131,8 @@ function countTimers(minutes, sound) {
 
   	    document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
 
+        document.querySelector('.circle_animation').style.strokeDashoffset = initialOffset-((i+1)*(initialOffset/time));
+        i++;
 
 
 
@@ -160,11 +154,11 @@ el.addEventListener('click', () => {
 
 	if(pause==false) {
 		pause = true;
-		el.innerHTML ="Segi!";
+		el.innerHTML ="<span class='icon-play'></span>";
 
 	}else{
 		pause = false;
-		el.innerHTML ="Gelditu!";
+		el.innerHTML ="<span class='icon-pause'></span>";
 
 	}
   reset = false;
@@ -174,12 +168,25 @@ el.addEventListener('click', () => {
 
 document.addEventListener('click', (event) => {
     if ( event.target.classList.contains( 'alarm__check' ) ) {
-
+      
 	    trySound.pause();
         trySound = new Audio("dist/sounds/"+ event.target.attributes["data-alarm"].value +".mp3");
         trySound.play();
 
+
+        var elements = document.querySelectorAll('.selected');
+    		// remove class to all chosen elements
+    		for (var i=0; i<elements.length; i++) {
+
+    	      elements[i].classList.remove('selected');
+    	    }
+
+      		event.target.classList.add('selected');
+
+
+
     }
+
 }, false);
 
 

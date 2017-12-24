@@ -3,57 +3,85 @@
 
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pomodoro</title>
-    <link rel="stylesheet" href="dist/css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>tik-tak.</title>
+	<link rel="stylesheet" href="dist/css/style.css">
 
-		<style>
-		.alarm__item.selected{
-			color: red;
-		}
-		</style>
+	<style>
+		.item {
+	    position: relative;
+	    float: left;
+	}
+
+	.item h2 {
+	    text-align:center;
+	    position: absolute;
+	    line-height: 125px;
+	    width: 100%;
+	}
+
+	svg {
+	    transform: rotate(-90deg);
+	}
+
+	.circle_animation {
+	  stroke-dasharray: 440; /* this value is the pixel circumference of the circle */
+	  stroke-dashoffset: 440;
+	  transition: all 1s linear;
+	}
+	</style>
+
 </head>
 
 
 <body>
+	<div class="container">
+		<header>
+			<h1 class="logo">tik-tak<span class="logo__dot">.</span></h1>
 
-	<h1>Pomodoro</h1>
 
-	<h2 id="timer"></h2>
+			<!-- atzera kontua SVG -->
+			<div class="item">
+			    <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+			      <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="8" stroke="#00a19a" fill="none"/>
+			    </svg>
+			</div>
 
-	<div class="reset" style="display: none">
+		</header>
+		<main class="timer">
+			<h2 id="timer">25:00</h2>
+			<div class="tools reset">
+				<button id="pause" class="is-pause"><span class="icon-play"></span></button>
+				<button id="reset" class="" disabled="disabled"><span class="icon-update"></span></button>
+				<button id="sound"><span class="icon-volume-none"></span></button>
+			</div>
+		</main>
+		<aside class="panel">
+			<h3 class="panel__title">Ezarpenak</h3>
+			<h4 class="panel__title">Iraupena</h4>
+			<div class="panel__form">
+				<label for="customMinutes">Lana<input class="panel__input" type="number" id="customMinutes" min="1" max="60"></label>
+				<label for="break">Deskantzua<input class="panel__input" id="break" type="number" id="" min="1" max="60"></label>
+			</div>
+			<div id="alarms" class="alarm">
+				<h4 class="panel__title">Soinua</h4>
 
-		<button id="pause" class="is-pause">Hasi!</button>
-		<button id="reset" disabled="disabled">Reset</button>
+				<div class="alarm__toolbox">
+					<button class="alarm__check" data-alarm="alarm-analog"><span class="icon-watch"></span>Probatu</button>
+					<button class="alarm__check" data-alarm="alarm-bells"><span class="icon-bell"></span>Probatu</button>
+					<button class="alarm__check" data-alarm="alarm-foghorn"><span class="icon-ship"></span>Probatu</button>
+					<button class="alarm__check" data-alarm="alarm-submarine"><span class="icon-submarine"></span>Probatu</button>
+			</div>
 
-		<button id="sound" style="display: none">Soinua gelditu!</button>
-
+			<button class="button is-positive" id="settings">Aldaketak gorde!</button>
+			<p class="is-small">by <a href="https://github.com/musarainak" target="_blank">Musarañak</a></p>
 	</div>
+	</aside>
 
-	<hr>
-
-	<h3>Iraupena</h3>
-	<input type="number" id="customMinutes" min="1" max="60">
-
-	<hr>
-	<div id="alarms" class="alarm">
-
-		<h3>Soinua</h3>
-
-		<div class="alarm__item" data-alarm="alarm-analog">Alarm Analog <button class="alarm__check" data-alarm="alarm-analog">Probatu</button></div>
-		<div class="alarm__item" data-alarm="alarm-bells">Alarm Bells <button class="alarm__check" data-alarm="alarm-bells">Probatu</button></div>
-		<div class="alarm__item" data-alarm="alarm-foghorn">Alarm Foghorn <button class="alarm__check" data-alarm="alarm-foghorn">Probatu</button></div>
-		<div class="alarm__item" data-alarm="alarm-submarine">Alarm Submarine <button class="alarm__check" data-alarm="alarm-submarine">Probatu</button></div>
-
-	</div>
-
-
-	<button id="settings">Aldaketak gorde!</button>
 
 	<script src="dist/js/scripts.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
-
 </body>
 
 </html>

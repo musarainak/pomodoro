@@ -1,0 +1,11 @@
+.timer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+}
+body{
+  background: url('../../assets/erlojua.svg') center no-repeat;
+  background-size: 110vh;
+}
