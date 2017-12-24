@@ -1,11 +1,10 @@
-.timer{
+.timer {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
-
-
-}
-body{
+  justify-content: center;
+  height: 100vh;
   background: url('../../assets/erlojua.svg') center no-repeat;
-  background-size: 110vh;
+  background-size: 115vh;
 }

@@ -6,11 +6,7 @@
   color: var(--color);
 }
 
-.icon-close {
-  text-decoration: none;
-}
-
-.icon-settings {
+.icon-close ,.icon-settings{
   position: absolute;
   top: calc(3 * var(--spacer));
   right: calc(3 * var(--spacer));
