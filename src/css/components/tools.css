@@ -1,4 +1,7 @@
-.tools{
-display: flex;
-justify-content: center;
+.timmer__tools {
+  display: flex;
+  justify-content: center;
+  [class^="icon-"], [class*=" icon-"] {
+    font-size: 6em;
+  }
 }

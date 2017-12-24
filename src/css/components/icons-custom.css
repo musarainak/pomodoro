@@ -1,8 +1,11 @@
 [class^="icon-"], [class*=" icon-"] {
 
-  font-size: 6em;
+  /* font-size: 6em; */
 
 }
 .icon-play{
   color:var(--color);
+}
+.icon-close{
+  text-decoration: none;
 }

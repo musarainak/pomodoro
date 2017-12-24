@@ -1,8 +1,14 @@
 .alarm__toolbox {
   display: flex;
   justify-content: space-around;
+  [class^="icon-"], [class*=" icon-"] {
+    font-size: 6em;
+  }
 }
-
+.alarm__check{
+  display: flex;
+  flex-direction: column;
+}
 .selected {
   position: relative;
   &:before {
