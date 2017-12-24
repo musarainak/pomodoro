@@ -24,13 +24,13 @@
 	</main>
 	<aside class="panel">
 		<h3 class="panel__title">Ezarpenak</h3>
-		<h4>Iraupena</h4>
-		<label for="customMinutes">Lana</label>
-		<input type="number" id="customMinutes" min="1" max="60">
-		<label for="break">Deskantzua</label>
-		<input id="break" type="number" id="" min="1" max="60">
+		<h4 class="panel__title">Iraupena</h4>
+		<div class="panel__form">
+			<label for="customMinutes">Lana<input class="panel__input" type="number" id="customMinutes" min="1" max="60"></label>
+			<label for="break">Deskantzua<input class="panel__input" id="break" type="number" id="" min="1" max="60"></label>
+		</div>
 		<div id="alarms" class="alarm">
-			<h4>Soinua</h4>
+			<h4 class="panel__title">Soinua</h4>
 		<div class="alarm__toolbox">
 				<div class="alarm__item selected" data-alarm="alarm-analog"> <button class="alarm__check" data-alarm="alarm-analog"><span class="icon-watch"></span>Probatu</button></div>
 			<div class="alarm__item" data-alarm="alarm-bells"></span> <button class="alarm__check" data-alarm="alarm-bells"><span class="icon-bell"></span>Probatu</button></div>
@@ -38,7 +38,7 @@
 			<div class="alarm__item" data-alarm="alarm-submarine"></span><button class="alarm__check" data-alarm="alarm-submarine"><span class="icon-submarine"></span>Probatu</button></div>
 		</div>
 		</div>
-		<button class="button" id="settings">Aldaketak gorde!</button>
+		<button class="button is-positive" id="settings">Aldaketak gorde!</button>
 		</div>
 	</aside>
 

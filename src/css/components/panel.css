@@ -1,0 +1,17 @@
+.panel{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: var(--white);
+}
+.panel__title{
+  line-height: 2em;
+}
+.panel__form{
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel__input{
+
+}
