@@ -1,4 +1,18 @@
-.alarm__toolbox{
+.alarm__toolbox {
   display: flex;
   justify-content: space-around;
+}
+
+.selected {
+  position: relative;
+  &:before {
+    position: absolute;
+    bottom: calc(-var(--spacer));
+    left: calc(50% - 5px);
+    width: var(--spacer);
+    height: var(--spacer);
+    border-radius: 500rem;
+    background: var(--color);
+    content: "";
+  }
 }

@@ -63,7 +63,7 @@ function resetAll(){
   document.getElementById("timer").innerHTML = x+":00";
   countTimers(x, snd);
 
-  el.innerHTML ="Hasi!";
+  el.innerHTML ="<span class='icon-play'></span>";
 
 }
 
@@ -134,11 +134,11 @@ el.addEventListener('click', () => {
 
 	if(pause==false) {
 		pause = true;
-		el.innerHTML ="Segi!";
+		el.innerHTML ="<span class='icon-play'></span>";
 
 	}else{
 		pause = false;
-		el.innerHTML ="Gelditu!";
+		el.innerHTML ="<span class='icon-pause'></span>";
 
 	}
   reset = false;
