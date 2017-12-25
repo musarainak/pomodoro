@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^7.1.6",
+    "browser-sync": "^2.21.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "cssnano": "^3.6.2",
@@ -28,7 +29,7 @@
     "postcss-import": "^11.0.0",
     "postcss-media-variables": "^2.0.0",
     "postcss-mixins": "^6.2.0",
-    "postcss-nested": "^2.1.2"
+    "postcss-nested": "^3.0.0"
   },
   "repository": {
     "type": "git",

@@ -12,10 +12,11 @@ const gulp = require('gulp'),
   rename = require('gulp-rename'),
   concat = require('gulp-concat'),
   uglify = require('gulp-uglify'),
+  browserSync = require('browser-sync'),
   babel = require('gulp-babel');
 
 /* css task */
-gulp.task('css', ()  => {
+gulp.task('css', () => {
   const processors = [
     cssimport,
     autoprefixer,
@@ -34,20 +35,36 @@ gulp.task('css', ()  => {
     },
     safe: true
   };
-  return gulp.src('./src/css/*.css').pipe(postcss(processors)).pipe(nano(configNano)).pipe(gulp.dest('./dist/css')).pipe(notify({message: 'CSSa prest dago ♡'}));
+  return gulp.src('./src/css/*.css').pipe(postcss(processors)).pipe(nano(configNano)).pipe(gulp.dest('./dist/css')).pipe(notify({
+    message: 'CSSa prest dago ♡'
+  }));
+});
+
+gulp.task('browser-sync', () => {
+  browserSync({
+    server: {
+      baseDir: './'
+    }
+  });
 });
 
 /* scripts task */
 gulp.task('js', function() {
-	return gulp.src([
-		'./src/js/*.js'
-	])
-	.pipe(babel({presets:['env']}))
-	.pipe(concat('scripts.js'))
-	.pipe(gulp.dest('./dist/js'))
-	.pipe(rename({suffix: '.min'}))
-	.pipe(uglify().on('error', function(e){console.log(e);}))
-	.pipe(gulp.dest('./dist/js'));
+  return gulp.src([
+      './src/js/*.js'
+    ])
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat('scripts.js'))
+    .pipe(gulp.dest('./dist/js'))
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(uglify().on('error', function(e) {
+      console.log(e);
+    }))
+    .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('watch', () => {
@@ -56,4 +73,4 @@ gulp.task('watch', () => {
 
 });
 
-gulp.task('default', ['css', 'watch']);
+gulp.task('default', ['css', 'browser-sync', 'watch']);
