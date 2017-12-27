@@ -41,13 +41,8 @@ function checkSettingInput(){
   reset = false;
   pause = true;
   let x=document.getElementById("customMinutes").value;
-
   selectedSound = document.querySelector('.alarm__check.selected');
-
   var snd = new Audio("dist/sounds/"+ selectedSound.getAttribute('data-alarm') +".mp3");
-
-  document.getElementById("timer").innerHTML = x+":00";
-
 
   if (isNaN(x) || x == "" )
   {
@@ -55,6 +50,7 @@ function checkSettingInput(){
     return false;
   }else{
 	  document.querySelector('.reset').style.display="block";
+    document.getElementById("timer").innerHTML = x+":00";
 
     //store
     localStorage.storeMinutes = x;
