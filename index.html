@@ -9,27 +9,51 @@
 	<link rel="stylesheet" href="dist/css/style.css">
 
 	<style>
-		.item {
-			position: relative;
-			float: left;
-		}
 
-		.item h2 {
-			text-align: center;
+		/* Naiara :)
+		 * estilo honeek css artxiboetan sartzeko dire.
+		 * hemen jarri dotez frogak azkar egiteko.
+		 *
+		 * SVG animazinoa zuk eindako erlojuaren gainean jartzie zelan ikusten dozu?
+		 */
+
+		.circle svg {
 			position: absolute;
-			line-height: 125px;
-			width: 100%;
-		}
-
-		svg {
+			z-index: -1;
+			top: 50px;
+			right: 190px;
+			width: 500px;
+			height: 500px;
 			transform: rotate(-90deg);
 		}
 
-		.circle_animation {
-			stroke-dasharray: 440;
+		.circle__animation {
+			stroke-dasharray: 1256;
 			/* this value is the pixel circumference of the circle */
-			stroke-dashoffset: 440;
-			transition: all 1s linear;
+			stroke-dashoffset: 1256;
+			transition: stroke-dashoffset 1s linear;
+		}
+
+		.circle__bg {
+			stroke-dasharray: 1256;
+			/* this value is the pixel circumference of the circle */
+			stroke-dashoffset: 0;
+		}
+
+
+		/* panela zabaltzeko animazioa */
+		body {
+			overflow: hidden;
+		}
+
+		.panel {
+			transform: translateX(100%);
+			transition: all .5s;
+			transition-timing-function: cubic-bezier(.8,.1,.8,.1);
+		}
+
+		.panel.is-open {
+			transform: translateX(0);
 		}
 	</style>
 
@@ -41,26 +65,27 @@
 		<header>
 			<h1 class="logo">tik-tak<span class="logo__dot">.</span></h1>
 
-
-			<!-- atzera kontua SVG -->
-			<div class="item">
-				<svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
-			      <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="8" stroke="#00a19a" fill="none"/>
-			    </svg>
-			</div>
-
 		</header>
 		<main class="timer">
-			<h2 id="timer">25:00</h2>
+
+			<!-- atzera kontua SVG -->
+			<div class="circle">
+				<svg xmlns="http://www.w3.org/2000/svg">
+					<circle id="circle-bg" class="circle__bg" r="200" cy="220" cx="220" stroke-width="10" stroke="#00a19a" fill="none"/>
+			    <circle id="circle" class="circle__animation" r="200" cy="220" cx="220" stroke-width="12" stroke="#ffffff" fill="none"/>
+			  </svg>
+			</div>
+
+			<h2 id="timer"></h2>
 			<div class="timmer__tools reset">
 				<button id="pause" class="is-pause"><span class="icon-play"></span></button>
 				<button id="reset" class="" disabled="disabled"><span class="icon-update"></span></button>
 				<button id="sound"><span class="icon-volume-none"></span></button>
 			</div>
-			<a href="" class="icon-settings"></a>
+			<a href="" class="icon-settings" id="icon-settings"></a>
 		</main>
 		<aside class="panel">
-			<a href="" class="icon-close"></a>
+			<a href="" class="icon-close" id="icon-close"></a>
 			<header class="panel__header">
 				<h3>Ezarpenak</h3>
 			</header>

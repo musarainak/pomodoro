@@ -15,6 +15,8 @@ setMinutes.value = localStorage.storeMinutes;
 
 window.onload = function () {
 
+  document.getElementById("timer").innerHTML = localStorage.storeMinutes + ":00";
+
   var elements = document.querySelectorAll('.alarm__check');
   // remove class to all chosen elements
   for (var i = 0; i < elements.length; i++) {
@@ -45,13 +47,19 @@ function checkSettingInput() {
     return false;
   } else {
     document.querySelector('.reset').style.display = "block";
-    elSettings.disabled = true;
 
     //store
     localStorage.storeMinutes = x;
     localStorage.storeAlarm = selectedSound.getAttribute('data-alarm');
 
-    countTimers(x, snd);
+    if (!elSettings.classList.contains('is-active')) {
+      finish = true;
+    }
+
+    resetAll();
+
+    elSettings.classList.add('is-active');
+    el.classList.add('is-active');
   }
 }
 
@@ -60,16 +68,23 @@ function resetAll() {
   reset = true;
   pause = true;
   el.disabled = true;
-  var x = document.getElementById("customMinutes").value;
-
-  selectedSound = document.querySelector('.alarm__check.selected');
-
-  var snd = new Audio("dist/sounds/" + selectedSound.getAttribute('data-alarm') + ".mp3");
-
-  document.getElementById("timer").innerHTML = x + ":00";
-  countTimers(x, snd);
 
   el.innerHTML = "<span class='icon-play'></span>";
+
+  var snd = new Audio("dist/sounds/" + localStorage.storeAlarm + ".mp3");
+
+  document.getElementById("timer").innerHTML = localStorage.storeMinutes + ":00";
+  countTimers(localStorage.storeMinutes, snd);
+}
+
+function startAll() {
+
+  reset = true;
+  pause = false;
+  var snd = new Audio("dist/sounds/" + localStorage.storeAlarm + ".mp3");
+
+  document.getElementById("timer").innerHTML = localStorage.storeMinutes + ":00";
+  countTimers(localStorage.storeMinutes, snd);
 }
 
 function countTimers(minutes, sound) {
@@ -80,59 +95,60 @@ function countTimers(minutes, sound) {
   var seconds = mainSeconds;
   var counter = setInterval(timer, 1000);
 
-  var time = mainSeconds * minutes + 2;
-  var initialOffset = '440';
+  var time = mainSeconds * minutes + 1;
   var i = 1;
-
-  /* Need initial run as interval hasn't yet occured... */
-
-  //document.querySelector('.circle_animation').style.strokeDashoffset = initialOffset-(1*(initialOffset/time));
-
+  var initialOffset = '1256';
 
   function timer() {
 
     setTimeout(function () {
       elReset.disabled = false;
-    }, 1000);
+    }, 0);
 
     if (reset) {
-      pause = true;
       reset = false;
+      document.querySelector('.circle__animation').style.strokeDashoffset = 1256;
 
       if (!finish) {
+        //is false
         clearInterval(counter);
+        finish = false;
       }
+      finish = false;
       setTimeout(function () {
         el.disabled = false;
-      }, 1000);
+      }, 0);
     }
 
     if (!pause) {
       //jarraitu pausarik ez bada
-      seconds--;
 
-      if (seconds < 0) {
+      if (i > 1) {
 
-        seconds = mainSeconds - 1;
-        if (mins > 0) {
-          mins--;
-        } else {
+        if (seconds == 0 && mins < 1) {
           clearInterval(counter);
           finish = true;
           seconds = 0;
           snd.play();
-          el.innerHTML = "Hasi!";
+          el.disabled = true;
+          document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
           notifyMe();
+        } else if (seconds < 0) {
+
+          seconds = mainSeconds - 1;
+          if (mins > 0) {
+            mins--;
+          }
         }
+
+        document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
       }
 
-      document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-
-      document.querySelector('.circle_animation').style.strokeDashoffset = initialOffset - (i + 1) * (initialOffset / time);
+      seconds--;
+      document.querySelector('.circle__animation').style.strokeDashoffset = initialOffset - i * (initialOffset / time);
       i++;
     }
   }
-
   return;
 }
 
@@ -152,6 +168,13 @@ el.addEventListener('click', function () {
   } else {
     pause = false;
     el.innerHTML = "<span class='icon-pause'></span>";
+
+    if (!el.classList.contains('is-active')) {
+      finish = false;
+      startAll();
+      el.classList.add('is-active');
+      elSettings.classList.add('is-active');
+    }
   }
   reset = false;
   elReset.disabled = true;
@@ -159,6 +182,17 @@ el.addEventListener('click', function () {
 });
 
 document.addEventListener('click', function (event) {
+
+  event.preventDefault();
+
+  if (event.target.id == "icon-close") {
+    document.querySelector('aside.panel').classList.remove('is-open');
+  } else if (event.target.id == "icon-settings") {
+    document.querySelector('aside.panel').classList.add('is-open');
+  }
+
+  //console.dir(event.target);
+
   if (event.target.classList.contains('alarm__check')) {
 
     trySound.pause();
