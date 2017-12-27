@@ -1,234 +1,204 @@
-var el = document.getElementById('pause');
-var elSettings = document.getElementById('settings');
-var elReset = document.getElementById('reset');
+
+// aldagai orokorrak zehaztu
 var pause = true;
 var reset = false;
 var finish = false;
-var selectedSound = document.querySelector('.alarm__check.selected');
-var setMinutes = document.getElementById("customMinutes");
-
-
-//store
-localStorage.storeMinutes = 25;
-localStorage.storeAlarm = 'alarm-submarine';
 
 window.onload = () => {
-
-  document.getElementById("timer").innerHTML = localStorage.storeMinutes+":00";
-
+  // store (gordetako balioak eskuratu)
+  if(!localStorage.storeMinutes){ localStorage.storeMinutes = 25 };
+  if(!localStorage.storeAlarm ){ localStorage.storeAlarm = 'alarm-submarine' };
+  document.getElementById("timer").innerHTML = localStorage.storeMinutes + ":00";
   document.getElementById("customMinutes").value = localStorage.storeMinutes;
 
-  var elements = document.querySelectorAll('.alarm__check');
-  // remove class to all chosen elements
-  for (var i=0; i<elements.length; i++) {
-
-      if(elements[i].getAttribute('data-alarm') == localStorage.storeAlarm){
-        elements[i].classList.add('selected');
-      }
+  // selected klasea gehitu klikatutako elementuari
+  let elements = document.querySelectorAll('.alarm__check');
+  for (var i = 0; i < elements.length; i++) {
+    if(elements[i].getAttribute('data-alarm') == localStorage.storeAlarm){
+      elements[i].classList.add('selected');
     }
-
-}
-
-
-//console.log(document.querySelector( 'alarm__item' ).getAttribute('data-alarm') ));
-
-
-
-
-
-function checkSettingInput(){
-
-  reset = false;
-  pause = true;
-  let x=document.getElementById("customMinutes").value;
-  selectedSound = document.querySelector('.alarm__check.selected');
-  var snd = new Audio("dist/sounds/"+ selectedSound.getAttribute('data-alarm') +".mp3");
-
-  if (isNaN(x) || x == "" )
-  {
-	alert('Erabili zenbakiak mesedez');
-    return false;
-  }else{
-	  document.querySelector('.reset').style.display="block";
-    document.getElementById("timer").innerHTML = x+":00";
-
-    //store
-    localStorage.storeMinutes = x;
-    localStorage.storeAlarm = selectedSound.getAttribute('data-alarm');
-
-    if(!elSettings.classList.contains('is-active')){
-      finish=true;
-    }
-
-	  resetAll();
-
-    elSettings.classList.add('is-active');
-    el.classList.add('is-active');
-
   }
 }
 
-function resetAll(){
+// Push.Permission.request();
+const notifyMe = () => {
+  Push.create('Ieeeepa!!!', {
+    body: 'Hartu deskantsu txiki bat ;)',
+    icon: 'icon.png',
+    timeout: 8000, // Timeout before notification closes automatically.
+    vibrate: [100, 100, 100], // An array of vibration pulses for mobile devices.
+    onClick: function() {
+      console.log(this); // Callback for when the notification is clicked.
+    }
+  });
+}
 
-  reset = true;
-  pause = true;
+const checkSettingInput = () => {
+  let el = document.getElementById('pause'),
+      elSettings = document.getElementById('settings'),
+      customMinutes = document.getElementById("customMinutes").value,
+      customSound = document.querySelector('.alarm__check.selected');
+
+  // zenbaki bat dela bermatu
+  if( isNaN(customMinutes) || customMinutes == " " ){
+    alert('Erabili zenbakiak mesedez');
+    return false;
+  }else{
+    document.querySelector('.reset').style.display="block";
+    document.getElementById("timer").innerHTML = customMinutes + ":00";
+
+    // store (gorde balio pertsonalizatuak hurrengo bisitetarako)
+    localStorage.storeMinutes = customMinutes;
+    localStorage.storeAlarm = customSound.getAttribute('data-alarm');
+
+    // klikatzen den lehen aldia ez bada finish true jarri (clearInterval ekiditzeko)
+    if( !elSettings.classList.contains('is-active') ){
+      finish=true;
+    }
+
+    // datuen jasotzea ondo joan bada martxan jarri (reset eta pause)
+    reset = false;
+    pause = true;
+    resetAll();
+
+    // lehen aldiz klikatu dela bermatu (is-active klasea gehitu ezarpenak eta play botoiei)
+    elSettings.classList.add('is-active');
+    el.classList.add('is-active');
+  }
+};
+
+
+const resetAll = () => {
+  let el = document.getElementById('pause'),
+      customSound = new Audio("dist/sounds/"+ localStorage.storeAlarm +".mp3");
+
+  // gordetako denbora jaso eta erakutsi
+  document.getElementById("timer").innerHTML = localStorage.storeMinutes+":00";
   el.disabled=true;
-
   el.innerHTML ="<span class='icon-play'></span>";
 
-
-  var snd = new Audio("dist/sounds/"+ localStorage.storeAlarm +".mp3");
-
-  document.getElementById("timer").innerHTML = localStorage.storeMinutes+":00";
-  countTimers(localStorage.storeMinutes, snd);
-
+  // guztia 0an jarri (reset eta pause)
+  reset = true;
+  pause = true;
+  countTimers(localStorage.storeMinutes, customSound);
 }
 
+const startAll = () => {
+  let customSound = new Audio("dist/sounds/"+ localStorage.storeAlarm +".mp3");
+  document.getElementById("timer").innerHTML = localStorage.storeMinutes+":00";
 
-function startAll(){
-
+  // guztia 0an jarri baina pausari gabe (reset eta pause)
   reset = true;
   pause = false;
-  var snd = new Audio("dist/sounds/"+ localStorage.storeAlarm +".mp3");
-
-  document.getElementById("timer").innerHTML = localStorage.storeMinutes+":00";
-  countTimers(localStorage.storeMinutes, snd);
-
+  countTimers(localStorage.storeMinutes, customSound);
 }
 
-function countTimers(minutes, sound) {
+const countTimers = (minutes, sound) => {
+  let el = document.getElementById('pause'),
+      elReset = document.getElementById('reset'),
+      customSound = sound,
+      mainSeconds = 60,
+      mins = minutes-1,
+      seconds = mainSeconds,
+      counter = setInterval(timer, 1000),
 
-  var snd = sound;
-  var mainSeconds = 60;
-  var mins = minutes-1;
-  var seconds = mainSeconds;
-  var counter = setInterval(timer, 1000);
+      //svg balioak
+      time = (mainSeconds*minutes),
+      i = 1,
+      initialOffset = '1256';
 
-  var time = (mainSeconds*minutes)+1;
-  var i = 1;
-  var initialOffset = '1256';
-
+  // set interval funtzioa (buklea)
   function timer() {
-
     setTimeout(()=>{elReset.disabled = false;},0);
 
-
+    //reset TRUE bada
     if(reset){
-      reset= false;
+      reset = false;
       document.querySelector('.circle__animation').style.strokeDashoffset = 1256;
 
-      if(!finish){ //is false
+      //finish FALSE bada
+      if(!finish){
         clearInterval(counter);
-        finish=false;
       }
-      finish=false;
+
+      finish = false;
       setTimeout(()=>{el.disabled = false;},0);
     }
 
-    if (!pause) { //jarraitu pausarik ez bada
-
-      if( i > 1 ){
-
-        if(seconds == 0 && mins<1){
-          clearInterval(counter);
-          finish = true;
-          seconds = 0;
-          snd.play();
-          el.disabled=true;
-          document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-          notifyMe();
-
-        }else if(seconds < 0) {
-
-              seconds = mainSeconds-1;
-          	  if( mins > 0 ) {
-                  mins--;
-              }
-
-          }
-
-          document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-
+    // pausarik ez bada buklea jarraitu
+    if (!pause) {
+      seconds--;
+      if( seconds == 0 && mins < 1 ){
+        clearInterval(counter);
+        finish = true;
+        seconds = 0;
+        customSound.play();
+        el.disabled = true;
+        document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+        notifyMe();
+      }else if( seconds < 0 ){
+        seconds = mainSeconds-1;
+        if( mins > 0 ) {
+          mins--;
         }
-
-        seconds--;
-        document.querySelector('.circle__animation').style.strokeDashoffset = initialOffset-(i*(initialOffset/time));
-        i++;
-
       }
+
+      document.getElementById("timer").innerHTML = mins.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+      document.querySelector('.circle__animation').style.strokeDashoffset = initialOffset-(i*(initialOffset/time));
+      i++;
+    }
   }
   return;
 }
 
-elSettings.addEventListener('click', () => { checkSettingInput(); });
-
-elReset.addEventListener('click', () => { resetAll(); });
-
-el.addEventListener('click', () => {
-
-	if(pause==false) {
-		pause = true;
-    el.innerHTML ="<span class='icon-play'></span>";
-	}else{
-		pause = false;
-		el.innerHTML ="<span class='icon-pause'></span>";
-
-    if(!el.classList.contains('is-active')){
-      finish=false;
-      startAll();
-      el.classList.add('is-active');
-      elSettings.classList.add('is-active');
-    }
-
-
-	}
-  reset = false;
-  elReset.disabled=true;
-	el.classList.toggle("is-play");
-});
-
 document.addEventListener('click', (event) => {
 
-    event.preventDefault();
+  event.preventDefault();
 
-    if(event.target.id == "icon-close"){
-      document.querySelector('aside.panel').classList.remove('is-open');
-    }else if(event.target.id == "icon-settings"){
-        document.querySelector('aside.panel').classList.add('is-open');
+  if(event.target.id == "settings"){
+    checkSettingInput();
+  }
+
+  if(event.target.id == "reset"){
+    resetAll();
+  }
+
+  //play/pause botoia duda
+  if(event.target.id == "pause"){
+
+    if(pause==false) {
+      pause = true;
+      event.target.innerHTML ="<span class='icon-play'></span>";
+    }else{
+      pause = false;
+      event.target.innerHTML ="<span class='icon-pause'></span>";
+
+      if(!event.target.classList.contains('is-active')){
+        finish=false;
+        startAll();
+        event.target.classList.add('is-active');
+        document.getElementById("settings").classList.add('is-active');
+      }
     }
 
-    //console.dir(event.target);
+    reset = false;
+    document.getElementById("reset").disabled=true;
+    event.target.classList.toggle("is-play");
+  }
 
-    if ( event.target.classList.contains( 'alarm__check' ) ) {
+  // panela zabaldu/itxi
+  if(event.target.id == "icon-close"){
+    document.querySelector('aside.panel').classList.remove('is-open');
+  }else if(event.target.id == "icon-settings"){
+      document.querySelector('aside.panel').classList.add('is-open');
+  }
 
-        var elements = document.querySelectorAll('.selected');
-    		// remove class to all chosen elements
-    		for (var i=0; i<elements.length; i++) {
-
-    	      elements[i].classList.remove('selected');
-    	    }
-
-      		event.target.classList.add('selected');
-
-
-
+  if ( event.target.classList.contains( 'alarm__check' ) ) {
+    let elements = document.querySelectorAll('.selected');
+    // remove class to all chosen elements
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].classList.remove('selected');
     }
-
+    event.target.classList.add('selected');
+  }
 }, false);
-
-
-Push.Permission.request();
-
-function notifyMe() {
-
-  Push.create('Ieeeepa!!!', {
-    body: 'Hartu deskantsu txiki bat ;)',
-    icon: 'icon.png',
-    timeout: 8000,               // Timeout before notification closes automatically.
-    vibrate: [100, 100, 100],    // An array of vibration pulses for mobile devices.
-    onClick: function() {
-        // Callback for when the notification is clicked.
-        console.log(this);
-    }
-});
-}
