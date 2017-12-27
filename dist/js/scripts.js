@@ -8,14 +8,16 @@ var reset = false;
 var finish = false;
 var selectedSound = document.querySelector('.alarm__check.selected');
 var setMinutes = document.getElementById("customMinutes");
-var trySound = new Audio();
 
-// store
-setMinutes.value = localStorage.storeMinutes;
+//store
+localStorage.storeMinutes = 25;
+localStorage.storeAlarm = 'alarm-submarine';
 
 window.onload = function () {
 
   document.getElementById("timer").innerHTML = localStorage.storeMinutes + ":00";
+
+  document.getElementById("customMinutes").value = localStorage.storeMinutes;
 
   var elements = document.querySelectorAll('.alarm__check');
   // remove class to all chosen elements
@@ -194,10 +196,6 @@ document.addEventListener('click', function (event) {
   //console.dir(event.target);
 
   if (event.target.classList.contains('alarm__check')) {
-
-    trySound.pause();
-    trySound = new Audio("dist/sounds/" + event.target.attributes["data-alarm"].value + ".mp3");
-    trySound.play();
 
     var elements = document.querySelectorAll('.selected');
     // remove class to all chosen elements
