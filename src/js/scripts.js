@@ -70,7 +70,10 @@ const checkSettingInput = () => {
 
 const resetAll = () => {
   let el = document.getElementById('pause'),
-      customSound = new Audio("dist/sounds/"+ localStorage.storeAlarm +".mp3");
+      customSound = document.querySelector('audio#general');
+
+  customSound.setAttribute('src', "dist/sounds/"+ localStorage.storeAlarm +".mp3"); //change the source
+  customSound.load();
 
   // gordetako denbora jaso eta erakutsi
   document.getElementById("timer").innerHTML = localStorage.storeMinutes+":00";
@@ -84,7 +87,11 @@ const resetAll = () => {
 }
 
 const startAll = () => {
-  let customSound = new Audio("dist/sounds/"+ localStorage.storeAlarm +".mp3");
+  let customSound = document.querySelector('audio#general');
+
+  customSound.setAttribute('src', "dist/sounds/"+ localStorage.storeAlarm +".mp3"); //change the source
+  customSound.load();
+
   document.getElementById("timer").innerHTML = localStorage.storeMinutes+":00";
 
   // guztia 0an jarri baina pausari gabe (reset eta pause)
@@ -190,11 +197,25 @@ document.addEventListener('click', (event) => {
   if(event.target.id == "icon-close"){
     document.querySelector('aside.panel').classList.remove('is-open');
   }else if(event.target.id == "icon-settings"){
-      document.querySelector('aside.panel').classList.add('is-open');
+    document.querySelector('aside.panel').classList.add('is-open');
+  }
+
+  if(event.target.id == "sound"){
+    let checkSound = document.getElementsByTagName("audio");
+
+    for(i = 0; i < checkSound.length; i++){
+      checkSound[i].pause();
+    }
   }
 
   if ( event.target.classList.contains( 'alarm__check' ) ) {
-    let elements = document.querySelectorAll('.selected');
+    let elements = document.querySelectorAll('.selected'),
+        checkSound = document.querySelector('audio#check-sound');
+
+    checkSound.setAttribute('src', "dist/sounds/"+ event.target.dataset.alarm +".mp3"); //change the source
+    checkSound.load();
+    checkSound.play();
+
     // remove class to all chosen elements
     for (var i = 0; i < elements.length; i++) {
       elements[i].classList.remove('selected');
@@ -202,3 +223,10 @@ document.addEventListener('click', (event) => {
     event.target.classList.add('selected');
   }
 }, false);
+
+// escape botoia
+document.addEventListener('keyup', (e) => {
+  if (e.keyCode == 27) {
+    document.querySelector('aside.panel').classList.remove('is-open');
+  }
+});

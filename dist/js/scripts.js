@@ -74,7 +74,10 @@ var checkSettingInput = function checkSettingInput() {
 
 var resetAll = function resetAll() {
   var el = document.getElementById('pause'),
-      customSound = new Audio("dist/sounds/" + localStorage.storeAlarm + ".mp3");
+      customSound = document.querySelector('audio#general');
+
+  customSound.setAttribute('src', "dist/sounds/" + localStorage.storeAlarm + ".mp3"); //change the source
+  customSound.load();
 
   // gordetako denbora jaso eta erakutsi
   document.getElementById("timer").innerHTML = localStorage.storeMinutes + ":00";
@@ -88,7 +91,11 @@ var resetAll = function resetAll() {
 };
 
 var startAll = function startAll() {
-  var customSound = new Audio("dist/sounds/" + localStorage.storeAlarm + ".mp3");
+  var customSound = document.querySelector('audio#general');
+
+  customSound.setAttribute('src', "dist/sounds/" + localStorage.storeAlarm + ".mp3"); //change the source
+  customSound.load();
+
   document.getElementById("timer").innerHTML = localStorage.storeMinutes + ":00";
 
   // guztia 0an jarri baina pausari gabe (reset eta pause)
@@ -202,8 +209,22 @@ document.addEventListener('click', function (event) {
     document.querySelector('aside.panel').classList.add('is-open');
   }
 
+  if (event.target.id == "sound") {
+    var checkSound = document.getElementsByTagName("audio");
+
+    for (i = 0; i < checkSound.length; i++) {
+      checkSound[i].pause();
+    }
+  }
+
   if (event.target.classList.contains('alarm__check')) {
-    var elements = document.querySelectorAll('.selected');
+    var elements = document.querySelectorAll('.selected'),
+        _checkSound = document.querySelector('audio#check-sound');
+
+    _checkSound.setAttribute('src', "dist/sounds/" + event.target.dataset.alarm + ".mp3"); //change the source
+    _checkSound.load();
+    _checkSound.play();
+
     // remove class to all chosen elements
     for (var i = 0; i < elements.length; i++) {
       elements[i].classList.remove('selected');
@@ -211,3 +232,10 @@ document.addEventListener('click', function (event) {
     event.target.classList.add('selected');
   }
 }, false);
+
+// escape botoia
+document.addEventListener('keyup', function (e) {
+  if (e.keyCode == 27) {
+    document.querySelector('aside.panel').classList.remove('is-open');
+  }
+});
