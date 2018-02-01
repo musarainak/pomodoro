@@ -4,4 +4,9 @@
 
 Bai, beste pomodoro tresna bat.
 
+# Instalazioa
+`npm install`
+
+`gulp`
+
 Sortze prozesuan dago...
